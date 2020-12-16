@@ -20,13 +20,12 @@ class Login extends React.Component {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/auth/login`, data)
       .then((res) => {
-        console.log(res.data.data.token);
-        localStorage.setItem("token", res.data.data.token);
-        res.headers["x-access-token"] = `Bearer ${res.data.data.token}`;
-        dispatch({ type: "LOGIN" });
-        // this.props.history.push("/");
+        setTimeout(() => {
+          localStorage.setItem("token", res.data.data.token);
+          res.headers["x-access-token"] = `Bearer ${res.data.data.token}`;
+          dispatch({ type: "LOGIN" });
+        }, 1500)
         console.log(auth.isLogin);
-        console.log("Login berhasil");
         console.log(this.props.auth);
         console.log(res);
         console.log(res.headers);
@@ -34,15 +33,8 @@ class Login extends React.Component {
       .catch(err => console.error(err));
   }
 
-  // saveThisUser = () => {
-  //   auth.login(() => {
-      // this.props.history.push("/");
-  //   });
-  // }
-
   render() {
     const { auth } = this.props;
-    console.log(auth.isLogin);
     return (
       <section id={css.FormContainer}>
         {auth.isLogin && <Redirect to='/' />}
@@ -62,14 +54,13 @@ class Login extends React.Component {
 
           <div className={css.FormSection}>
             <form
-              action='#'
               onSubmit={this.handleSubmit}
+              action='#'
               className={css.FillForm}
             >
               <div className={`${css.ColInput} ${css.FormInput}`}>
                 <input
                   type='email'
-                  // name='email'
                   id='email'
                   placeholder='Email'
                   onChange={(e) => (this.email = e.target.value)}
@@ -79,7 +70,6 @@ class Login extends React.Component {
               <div className={`${css.ColInput} ${css.FormInput}`}>
                 <input
                   type='password'
-                  // name='password'
                   id='password'
                   placeholder='Password'
                   onChange={(e) => (this.password = e.target.value)}

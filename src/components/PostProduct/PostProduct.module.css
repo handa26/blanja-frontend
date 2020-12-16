@@ -1,0 +1,37 @@
+/* .Row {
+  max-width: 1140px;
+  margin: 0 auto;
+} */
+
+.FormGroup {
+  margin: 0 auto 1.25rem auto;
+  padding: 0.25rem;
+}
+
+.ContactForm {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.InputText {}
+
+/* input[type="text"],
+input[type="email"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  padding: 7px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+} */
+
+form {
+  padding: 2.5rem 0.625rem;
+  border-radius: 0.25rem;
+}
+@media (min-width: 480px) {
+  form {
+    padding: 2.5rem;
+  }
+}

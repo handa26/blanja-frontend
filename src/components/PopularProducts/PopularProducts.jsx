@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import CollectionItem from "../CollectionItem/CollectionItem";
 
-import css from "./NewProducts.module.css";
+import css from "./PopularProducts.module.css";
 
 class NewProducts extends React.Component {
   constructor() {
@@ -10,7 +10,7 @@ class NewProducts extends React.Component {
     this.state = {
       products: {},
       popularProducts: {},
-      pageInfo: {}
+      pageInfo: {},
     };
   }
 
@@ -18,9 +18,9 @@ class NewProducts extends React.Component {
     console.log("Selected");
   };
 
-  getNewProducts = () => {
+  getPopularProducts = () => {
     axios
-      .get(process.env.REACT_APP_BASEURL + "/products?page=1&limit=4")
+      .get(process.env.REACT_APP_BASEURL + "/products/popular?page=1&limit=4")
       .then(({ data }) => {
         console.log(data.pageInfo);
         this.setState({ products: data, pageInfo: data.pageInfo });
@@ -31,10 +31,10 @@ class NewProducts extends React.Component {
   nextPage = () => {
     window.location.href =
       "http://localhost:3001" + this.state.pageInfo.nextPage;
-  }
+  };
 
   componentDidMount() {
-    this.getNewProducts()
+    this.getPopularProducts();
   }
 
   render() {
@@ -45,7 +45,7 @@ class NewProducts extends React.Component {
         {/* New products */}
         <div className='container'>
           <div className={css.Head}>
-            <h2>New</h2>
+            <h2>Popular</h2>
             <span className='text-muted'>You've never seen it before!</span>
           </div>
 

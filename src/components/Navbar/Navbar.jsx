@@ -46,20 +46,6 @@ class Navbar extends React.Component {
     isLogin: false,
   };
 
-  // logOut = () => {
-  //   const { dispatch } = this.props;
-  //   const data = "";
-  //   axios
-  //     .post(`${process.env.REACT_APP_BASEURL}/auth/logout`, data)
-  //     .then((res) => {
-  //       console.log(res);
-  //       localStorage.setItem("token", res.data);
-  //       res.headers["x-access-token"] = `Bearer ${res.data}`;
-  //       dispatch({ type: "LOGOUT" });
-  //     })
-  //     .catch((err) => console.error(err));
-  // };
-
   logOut = () => {
     const { dispatch } = this.props;
     const config = {
@@ -97,8 +83,25 @@ class Navbar extends React.Component {
 
   render() {
     console.log(this.state.product_name);
-    const { auth } = this.props;
+    const { auth, dispatch } = this.props;
     console.log(auth.isLogin);
+    console.log(localStorage.getItem("token"));
+    let authBtn;
+    if (localStorage.getItem("token")) {
+      authBtn = (
+        <button className={`${css.Btn} ${css.Secondary}`} onClick={this.logOut}>
+          <Link
+            onClick={() => dispatch({ type: "LOGIN" })}
+            style={{ color: "black" }}
+            to='/login'
+          >
+            Logout
+          </Link>
+        </button>
+      );
+    } else {
+      authBtn = <this.state.navMenu />;
+    }
     return (
       <nav>
         <div className={css.NavContainer}>
@@ -257,7 +260,8 @@ class Navbar extends React.Component {
           {/* Auth */}
           <div className={css.NavBtn}>
             <img src={CartIcon} className={css.CartIcon} alt='cart-icon' />
-            <this.state.navMenu />
+            {/* <this.state.navMenu /> */}
+            {authBtn}
           </div>
 
           <div className={`${css.NavMenu}`}>
@@ -271,7 +275,7 @@ class Navbar extends React.Component {
                 <p>My Cart</p>
               </div>
               <div className={css.Menu}>
-                {auth.isLogin ? (
+                {/* {auth.isLogin ? (
                   <button
                     className={`${css.Btn} ${css.Secondary}`}
                     onClick={this.logOut}
@@ -282,7 +286,8 @@ class Navbar extends React.Component {
                   </button>
                 ) : (
                   <this.state.navMenu />
-                )}
+                )} */}
+                {authBtn}
               </div>
             </div>
           </div>

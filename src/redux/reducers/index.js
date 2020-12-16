@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 
-import CounterReducer from "./Counter";
+import ProductsReducer from "./Products";
 
 const reducers = combineReducers({
-  counter: CounterReducer,
+  products: ProductsReducer,
   auth: (prevState = { isLogin: false }, action) => {
     switch (action.type) {
       case "LOGIN":

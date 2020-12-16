@@ -4,9 +4,9 @@ import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
 import CollectionItem from "../../components/CollectionItem/CollectionItem";
 
-import css from "./Pagination.module.css";
+import css from "./PopularPaginate.module.css";
 
-const getUrl = "http://localhost:3000/products?";
+const getUrl = "http://localhost:3000/products/popular?";
 const urlParams = new URLSearchParams(window.location.search);
 
 class Pagination extends React.Component {
@@ -23,7 +23,7 @@ class Pagination extends React.Component {
     console.log("Selected");
   };
 
-  getNewProducts = () => {
+  getPopularProducts = () => {
     axios
       .get(getUrl + urlParams)
       .then(({ data }) => {
@@ -52,7 +52,7 @@ class Pagination extends React.Component {
           {/* New products */}
           <div className='container'>
             <div className={css.Head}>
-              <h2>New</h2>
+              <h2>Popular</h2>
               <span className='text-muted'>You've never seen it before!</span>
             </div>
 

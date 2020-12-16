@@ -1,3 +1,11 @@
+import {
+  getAllProductsString,
+  getSingleProductString,
+  pending,
+  rejected,
+  fulfilled
+} from "../actionString"
+
 const initialState = {
   productsData: {},
   err: {},
@@ -8,31 +16,52 @@ const initialState = {
 
 const productsReducer = (prevState = initialState, action) => {
   switch (action.type) {
-    case "GET_ALL_PRODUCTS_PENDING":
-      return{
+    case getAllProductsString + pending:
+      return {
         ...prevState,
         isPending: true,
         isRejected: false,
         isFulfilled: false,
       };
-    case "GET_ALL_PRODUCTS_REJECTED":
+    case getAllProductsString + rejected:
       return {
         ...prevState,
         isPending: false,
         isRejected: true,
         err: action.payload,
       };
-    case "GET_ALL_PRODUCTS_FULFILLED":
+    case getAllProductsString + fulfilled:
       return {
         ...prevState,
         isPending: false,
         isFulfilled: true,
-        productsData: action.payload.data
+        productsData: action.payload.data,
+      };
+    case getSingleProductString + pending:
+      return {
+        ...prevState,
+        isPending: true,
+        isRejected: false,
+        isFulfilled: false,
+      };
+    case getSingleProductString + rejected:
+      return {
+        ...prevState,
+        isPending: false,
+        isRejected: true,
+        err: action.payload,
+      };
+    case getSingleProductString + fulfilled:
+      return {
+        ...prevState,
+        isPending: false,
+        isFulfilled: true,
+        singleProduct: action.payload.data,
       };
     default:
       return {
         ...prevState,
-      }
+      };
   }
 }
 
