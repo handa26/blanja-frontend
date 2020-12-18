@@ -24,7 +24,7 @@ function Router() {
           {/* <ProtectedRoute exact path='/' component={Homepage} /> */}
           <Route exact path='/' component={Homepage} />
           <Route path='/search' component={SearchPage} />
-          <Route path='/post' component={PostProduct} />
+          <ProtectedRoute path='/post' component={PostProduct} />
           <Route path='/products' component={Pagination} />
           <Route path='/products/popular' component={PopularPaginate} />
           <Route path='/product/:id' component={Product} />
