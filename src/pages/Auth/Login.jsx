@@ -9,7 +9,11 @@ import css from "./Auth.module.css";
 import BlanjaLogo from "../../assets/images/blanja-logo.svg";
 
 class Login extends React.Component {
+  state = {
+    isLogin: false,
+  }
   handleSubmit = (e) => {
+    e.preventDefault();
     const { dispatch, auth } = this.props;
     const data = {
       email: this.email,
@@ -20,24 +24,24 @@ class Login extends React.Component {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/auth/login`, data)
       .then((res) => {
-        setTimeout(() => {
-          localStorage.setItem("token", res.data.data.token);
-          res.headers["x-access-token"] = `Bearer ${res.data.data.token}`;
-          dispatch({ type: "LOGIN" });
-        }, 1500)
-        console.log(auth.isLogin);
-        console.log(this.props.auth);
-        console.log(res);
-        console.log(res.headers);
+        localStorage.setItem("token", res.data.data.token);
+        res.headers["x-access-token"] = `Bearer ${res.data.data.token}`;
+        localStorage.setItem("isLogin", 1);
+        dispatch({ type: "LOGIN" });
+        console.log("Login?" + auth.isLogin);
       })
       .catch(err => console.error(err));
   }
 
   render() {
     const { auth } = this.props;
+    
+    // * If user is login, then directed to specific route
+    if (auth.isLogin) {
+      return <Redirect to='/' />;
+    }
     return (
       <section id={css.FormContainer}>
-        {auth.isLogin && <Redirect to='/' />}
         <div className={css.Row}>
           <div className={css.Logo}>
             <img src={BlanjaLogo} alt='blanja logo' />
@@ -55,7 +59,6 @@ class Login extends React.Component {
           <div className={css.FormSection}>
             <form
               onSubmit={this.handleSubmit}
-              action='#'
               className={css.FillForm}
             >
               <div className={`${css.ColInput} ${css.FormInput}`}>

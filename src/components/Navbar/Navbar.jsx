@@ -1,10 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
 import { connect } from "react-redux";
-
-// import auth from "../../pages/Auth/Auth"
-// import NotFound from "../NotFound/NotFound";
 
 import css from "./Navbar.module.css";
 import Logo from "../../assets/images/blanja-logo.svg";
@@ -22,20 +19,22 @@ class Navbar extends React.Component {
             type='button'
             value='Login'
             className={`${css.Btn} ${css.Primary}`}
+            onClick={(e) => {
+              this.props.history.push({
+                pathname: "/login",
+              });
+            }}
           />
           <input
             type='button'
             value='Signup'
             className={`${css.Btn} ${css.Secondary}`}
+            onClick={(e) => {
+              this.props.history.push({
+                pathname: "/register",
+              });
+            }}
           />
-          <button
-            className={`${css.Btn} ${css.Secondary}`}
-            onClick={this.logOut}
-          >
-            <Link style={{ color: "white" }} to='/login'>
-              Logout
-            </Link>
-          </button>
         </div>
       );
     },
@@ -57,9 +56,9 @@ class Navbar extends React.Component {
     axios
       .post(`${process.env.REACT_APP_BASEURL}/auth/logout`, data, config)
       .then((res) => {
-        console.log(res);
         dispatch({ type: "LOGOUT"});
         localStorage.setItem("token", "");
+        localStorage.setItem("isLogin", 0);
       })
       .catch(err => console.error(err));
   }
@@ -82,25 +81,23 @@ class Navbar extends React.Component {
   };
 
   render() {
-    console.log(this.state.product_name);
-    const { auth, dispatch } = this.props;
-    console.log(auth.isLogin);
-    console.log(localStorage.getItem("token"));
+    const { auth } = this.props;
     let authBtn;
-    if (localStorage.getItem("token")) {
+
+    // If user currently in logout state
+    // Show the conditional components
+    if (auth.isLogin === 0) {
+      // If user logout
+      authBtn = <this.state.navMenu />
+    } else {
+      // If user login
       authBtn = (
         <button className={`${css.Btn} ${css.Secondary}`} onClick={this.logOut}>
-          <Link
-            onClick={() => dispatch({ type: "LOGIN" })}
-            style={{ color: "black" }}
-            to='/login'
-          >
+          <Link style={{ color: "black", textDecoration: "none" }} to='/login'>
             Logout
           </Link>
         </button>
       );
-    } else {
-      authBtn = <this.state.navMenu />;
     }
     return (
       <nav>
@@ -275,18 +272,6 @@ class Navbar extends React.Component {
                 <p>My Cart</p>
               </div>
               <div className={css.Menu}>
-                {/* {auth.isLogin ? (
-                  <button
-                    className={`${css.Btn} ${css.Secondary}`}
-                    onClick={this.logOut}
-                  >
-                    <Link style={{ color: "white" }} to='/login'>
-                      Logout
-                    </Link>
-                  </button>
-                ) : (
-                  <this.state.navMenu />
-                )} */}
                 {authBtn}
               </div>
             </div>
@@ -303,4 +288,4 @@ const mapStateToProps = ({ auth }) => {
   };
 };
 
-export default connect(mapStateToProps)(Navbar);
+export default withRouter(connect(mapStateToProps)(Navbar));
