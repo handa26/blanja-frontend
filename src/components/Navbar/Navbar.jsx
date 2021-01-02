@@ -8,6 +8,7 @@ import Logo from "../../assets/images/blanja-logo.svg";
 import SearchIcon from "../../assets/icons/Search.svg";
 import FilterIcon from "../../assets/icons/Filter.svg";
 import CartIcon from "../../assets/icons/Cart.svg";
+import Avatar from "../../assets/images/profile.png";
 
 class Navbar extends React.Component {
   state = {
@@ -92,11 +93,26 @@ class Navbar extends React.Component {
     } else {
       // If user login
       authBtn = (
-        <button className={`${css.Btn} ${css.Secondary}`} onClick={this.logOut}>
-          <Link style={{ color: "black", textDecoration: "none" }} to='/login'>
-            Logout
+        <>
+          <Link to='/profile' className={css.BtnWrap}>
+            <img
+              src={Avatar}
+              alt='Profile'
+              className='rounded-circle img-fluid'
+            />
           </Link>
-        </button>
+          <button
+            className={`${css.Btn} ${css.Secondary}`}
+            onClick={this.logOut}
+          >
+            <Link
+              style={{ color: "black", textDecoration: "none" }}
+              to='/login'
+            >
+              <i class='fas fa-sign-out-alt'></i>
+            </Link>
+          </button>
+        </>
       );
     }
     return (

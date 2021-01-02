@@ -9,8 +9,6 @@ class NewProducts extends React.Component {
     super();
     this.state = {
       products: {},
-      popularProducts: {},
-      pageInfo: {}
     };
   }
 
@@ -20,26 +18,20 @@ class NewProducts extends React.Component {
 
   getNewProducts = () => {
     axios
-      .get(process.env.REACT_APP_BASEURL + "/products?page=1&limit=4")
+      .get(process.env.REACT_APP_BASEURL + "/products?page=1&limit=8")
       .then(({ data }) => {
         console.log(data.pageInfo);
-        this.setState({ products: data, pageInfo: data.pageInfo });
+        this.setState({ products: data });
       })
       .catch((err) => console.error(err));
   };
-
-  nextPage = () => {
-    window.location.href =
-      "http://localhost:3001" + this.state.pageInfo.nextPage;
-  }
 
   componentDidMount() {
     this.getNewProducts()
   }
 
   render() {
-    const { products, pageInfo } = this.state;
-    console.log(pageInfo.nextPage);
+    const { products } = this.state;
     return (
       <div id={css.CollectionItem}>
         {/* New products */}
@@ -76,11 +68,6 @@ class NewProducts extends React.Component {
                 }
               )}
           </div>
-          <nav aria-label='Page navigation example'>
-            <button>Prev</button>
-            <button>{pageInfo.currentPage}</button>
-            <button onClick={this.nextPage}>Next</button>
-          </nav>
         </div>
       </div>
     );

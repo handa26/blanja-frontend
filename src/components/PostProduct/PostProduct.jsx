@@ -137,10 +137,9 @@ class PostProduct extends Component {
     console.log(this.state);
     return (
       <>
-        <Navbar />
         <Row>
           <Row>
-            <Title>Tambah Produk</Title>
+            <Title>Add Product</Title>
           </Row>
           <StyledForm className={css.ContactForm} onSubmit={this.submitHandler}>
             <div className={`${css.Row} ${css.FormGroup}`}>
@@ -150,6 +149,7 @@ class PostProduct extends Component {
               <div>
                 <Input
                   type='text'
+                  id='name-label'
                   name='product_name'
                   placeholder='Nike Air...'
                   value={product_name}
@@ -297,135 +297,3 @@ class PostProduct extends Component {
 }
 
 export default PostProduct;
-
-{
-  /* <Form onSubmit={this.submitHandler}>
-          <Form.Group controlId='formBasicText'>
-            <Form.Label className='center'>name</Form.Label>
-            <Form.Control
-              type='text'
-              name='product_name'
-              value={product_name}
-              onChange={this.changeHandler}
-              placeholder='nama'
-            />
-          </Form.Group>
-          <div class='mb-3'>
-            <input
-              type='text'
-              name='product_name'
-              value={product_name}
-              onChange={this.changeHandler}
-              className='form-control'
-              id='exampleInputEmail1'
-              aria-describedby='emailHelp'
-              placeholder='Product Name'
-            />
-          </div>
-
-          <Form.Group controlId='formBasicText'>
-            <Form.Control
-              type='text'
-              name='product_brand'
-              value={product_brand}
-              onChange={this.changeHandler}
-              placeholder='Brand'
-            />
-          </Form.Group>
-
-          <Form.Group controlId='formBasicText'>
-            <Form.Control
-              type='text'
-              name='product_color'
-              value={product_color}
-              onChange={this.changeHandler}
-              placeholder='color'
-            />
-          </Form.Group>
-
-          <Form.Group controlId='formBasicText'>
-            <br></br>
-            <select
-              id='category'
-              onChange={(e) => this.changeCategoryHandler()}
-            >
-              <option disabled selected hidden>
-                Pilih kategori
-              </option>
-              <option value='1'>T-shirt</option>
-              <option value='2'>Shorts</option>
-              <option value='3'>Jackets</option>
-              <option value='4'>Pants</option>
-              <option value='5'>Shoes</option>
-            </select>
-            <Form.Control type="text" name='category_id' value={category_id} onChange={this.changeHandler} placeholder="Password" />
-          </Form.Group>
-          <Form.Group controlId='formBasicText'>
-            <Form.Control
-              type='text'
-              name='product_price'
-              value={product_price}
-              onChange={this.changeHandler}
-              placeholder='Harga'
-            />
-          </Form.Group>
-
-          <Form.Group controlId='formBasicText'>
-            <Form.Control
-              type='text'
-              name='product_rating'
-              value={product_rating}
-              onChange={this.changeHandler}
-              placeholder='rating'
-            />
-          </Form.Group>
-
-          <Form.Group controlId='formBasicText'>
-            <Form.Control
-              type='text'
-              name='product_description'
-              value={product_description}
-              onChange={this.changeHandler}
-              placeholder='Product Description'
-            />
-          </Form.Group>
-
-          <Form.Group controlId='formBasicText'>
-            <Form.Control
-              type='text'
-              name='product_qty'
-              value={product_qty}
-              onChange={this.changeHandler}
-              placeholder='Product Quantity'
-            />
-          </Form.Group>
-
-          <div class='input-group mb-3'>
-            <label class='input-group-text' for='inputGroupFile01'>
-              Upload
-            </label>
-            <input
-              type='file'
-              name='image'
-              onChange={(e) => this.handleFile(e)}
-              className='form-control'
-              id='inputGroupFile01'
-              multiple
-            />
-          </div>
-
-          <Form.Group controlId='formBasicText'>
-            <Form.Label>image</Form.Label>
-            <Form.Control
-              type='file'
-              name='image'
-              onChange={(e) => this.handleFile(e)}
-              placeholder=''
-              multiple
-            />
-          </Form.Group>
-          <Button variant='primary' type='submit'>
-            Submit
-          </Button>
-        </Form> */
-}

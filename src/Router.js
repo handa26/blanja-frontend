@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 import Homepage from "./pages/Homepage/Homepage";
@@ -15,14 +14,16 @@ import ResetPassword from "./pages/Auth/ResetPassword";
 import ConfirmPassword from "./pages/Auth/ConfirmPassword";
 import NotFound from "./components/NotFound/NotFound";
 import PostProduct from "./components/PostProduct/PostProduct";
+// import Profile from "./pages/Profile/Profile";
+import AddProduct from "./pages/AddProduct/AddProduct";
 
 function Router() {
   return (
     <Provider store={store}>
       <BrowserRouter>
         <Switch>
-          {/* <ProtectedRoute exact path='/' component={Homepage} /> */}
           <Route exact path='/' component={Homepage} />
+          <ProtectedRoute path='/profile' component={AddProduct} />
           <Route path='/search' component={SearchPage} />
           <ProtectedRoute path='/post' component={PostProduct} />
           <Route path='/products' component={Pagination} />

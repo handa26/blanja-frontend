@@ -202,7 +202,7 @@ class ProductDetails extends React.Component {
               </div>
               <div className=' d-flex justify-content-between'>
                 <a href className={`${css.BtnGrup} ${css.BtnChart} mt-2 me-2`}>
-                  Chart
+                  Chat
                 </a>
                 <a href className={`${css.BtnGrup} ${css.BtnAddBag} mt-2 me-2`}>
                   Add bag
