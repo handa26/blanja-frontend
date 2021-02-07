@@ -2,6 +2,7 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
 import { connect } from "react-redux";
+import {logout} from '../../redux/action/authAction';
 
 import css from "./Navbar.module.css";
 import Logo from "../../assets/images/blanja-logo.svg";
@@ -43,23 +44,20 @@ class Navbar extends React.Component {
     product_name: "",
     category: "",
     searchedItems: {},
-    isLogin: false,
   };
 
   logOut = () => {
-    const { dispatch } = this.props;
     const config = {
       headers: {
-        "x-access-token": "Bearer " + localStorage.getItem("token")
+        "x-access-token": "Bearer " + this.props.token
       }
     };
     const data = "";
     axios
       .post(`${process.env.REACT_APP_BASEURL}/auth/logout`, data, config)
       .then((res) => {
-        dispatch({ type: "LOGOUT"});
-        localStorage.setItem("token", "");
-        localStorage.setItem("isLogin", 0);
+        this.props.logoutRedux();
+        console.log(res);
       })
       .catch(err => console.error(err));
   }
@@ -82,12 +80,15 @@ class Navbar extends React.Component {
   };
 
   render() {
-    const { auth } = this.props;
+    const { isLogin, token } = this.props;
+    console.log(isLogin);
     let authBtn;
+
+    console.log(token);
 
     // If user currently in logout state
     // Show the conditional components
-    if (auth.isLogin === 0) {
+    if (isLogin === false) {
       // If user logout
       authBtn = <this.state.navMenu />
     } else {
@@ -272,8 +273,12 @@ class Navbar extends React.Component {
 
           {/* Auth */}
           <div className={css.NavBtn}>
-            <img src={CartIcon} className={css.CartIcon} alt='cart-icon' />
-            {/* <this.state.navMenu /> */}
+            <img
+              onClick={() => this.props.history.push("/cart")}
+              src={CartIcon}
+              className={css.CartIcon}
+              alt='cart-icon'
+            />
             {authBtn}
           </div>
 
@@ -284,12 +289,14 @@ class Navbar extends React.Component {
 
             <div className={css.MenuList}>
               <div className={css.Menu}>
-                <img src={CartIcon} className={css.CartIcon} alt='cart-icon' />
-                <p>My Cart</p>
+                <img
+                  onClick={() => this.props.history.push("/cart")}
+                  src={CartIcon}
+                  className={css.CartIcon}
+                  alt='cart-icon'
+                />
               </div>
-              <div className={css.Menu}>
-                {authBtn}
-              </div>
+              <div className={css.Menu}>{authBtn}</div>
             </div>
           </div>
         </div>
@@ -298,10 +305,21 @@ class Navbar extends React.Component {
   }
 }
 
-const mapStateToProps = ({ auth }) => {
+const mapStateToProps = (state) => {
   return {
-    auth,
+    isLogin: state.auth.isLogin,
+    token: state.auth.token,
+    id: state.auth.id,
+    level: state.auth.level,
+    name: state.auth.name,
+    email: state.auth.email,
   };
 };
 
-export default withRouter(connect(mapStateToProps)(Navbar));
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logoutRedux: () => dispatch(logout()),
+  };
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar));

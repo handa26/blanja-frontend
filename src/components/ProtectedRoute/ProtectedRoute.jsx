@@ -2,12 +2,12 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
-const ProtectedRoute = ({ component: Component, auth, ...rest }) => {
+const ProtectedRoute = ({ component: Component, isLogin, ...rest }) => {
   return (
     <Route
       {...rest}
       render={(props) => {
-        if (auth.isLogin) {
+        if (isLogin) {
           return <Component {...props} />;
         } else {
           return (
@@ -26,9 +26,9 @@ const ProtectedRoute = ({ component: Component, auth, ...rest }) => {
   );
 };
 
-const mapStateToProps = ({ auth }) => {
+const mapStateToProps = (state) => {
   return {
-    auth,
+    isLogin: state.auth.isLogin,
   };
 };
 

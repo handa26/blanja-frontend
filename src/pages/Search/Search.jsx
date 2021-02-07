@@ -2,8 +2,7 @@ import React from "react";
 import axios from "axios";
 
 import Navbar from "../../components/Navbar/Navbar";
-import CollectionItem from "../../components/CollectionItem/CollectionItem"; 
-import NotFound from "../../components/NotFound/NotFound";
+import CollectionItem from "../../components/CollectionItem/CollectionItem";
 
 import css from "./Search.module.css";
 

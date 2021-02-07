@@ -37,7 +37,21 @@ class ProductDetails extends React.Component {
   };
 
   render() {
-    const { name, desc, price, brand, image,image1, image2, image3, image4, image5, category, rating } = this.props;
+    const {
+      name,
+      desc,
+      price,
+      brand,
+      image,
+      image1,
+      image2,
+      image3,
+      image4,
+      image5,
+      category,
+      rating,
+      addToCart
+    } = this.props;
     return (
       <div>
         <Navbar />
@@ -201,15 +215,18 @@ class ProductDetails extends React.Component {
                 </div>
               </div>
               <div className=' d-flex justify-content-between'>
-                <a href className={`${css.BtnGrup} ${css.BtnChart} mt-2 me-2`}>
+                <button className={`${css.BtnGrup} ${css.BtnChart} mt-2 me-2`}>
                   Chat
-                </a>
-                <a href className={`${css.BtnGrup} ${css.BtnAddBag} mt-2 me-2`}>
-                  Add bag
-                </a>
-                <a href className={`${css.BtnGrup} ${css.BtnBuy} mt-2`}>
+                </button>
+                <button
+                  onClick={addToCart}
+                  className={`${css.BtnGrup} ${css.BtnAddBag} mt-2 me-2`}
+                >
+                  Add to bag
+                </button>
+                <button href className={`${css.BtnGrup} ${css.BtnBuy} mt-2`}>
                   Buy Now
-                </a>
+                </button>
               </div>
             </div>
           </div>

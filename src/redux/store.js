@@ -1,28 +1,20 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { createLogger } from "redux-logger";
-import promiseMiddleware from "redux-promise-middleware";
+import { createStore } from "redux";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
-// import CounterReducer from "./reducers/Counter";
-// import ProductsReducer from "./reducers/Products";
+import reducer from "./reducer";
 
-import reducers from "./reducers/index"
+const persistConfig = {
+  key: "root",
+  storage,
+};
 
-const logger = createLogger();
+const persistedReducer = persistReducer(persistConfig, reducer);
 
-// Berisikan store enhancers
-const enhancers = applyMiddleware(promiseMiddleware, logger);
-
-// Redux promise middleware mengubah 1 async function menjadi 2 bagian
-// action pending
-// action fulfilled/rejected
-
-// const combinedReducers = combineReducers({
-//   // Key => nama reducer
-//   // value => fungsi reducer
-//   counter: CounterReducer,
-//   products: ProductsReducer
-// })
-
-const reduxStore = createStore(reducers, enhancers);
-
-export default reduxStore;
+let store = createStore(persistedReducer);
+let persistor = persistStore(store);
+// eslint-disable-next-line import/no-anonymous-default-export
+export {
+  store,
+  persistor
+};

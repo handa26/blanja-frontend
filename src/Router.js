@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "./redux/store";
+import {store, persistor} from './redux/store';
+import { PersistGate } from "redux-persist/integration/react";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 import Homepage from "./pages/Homepage/Homepage";
@@ -14,28 +15,33 @@ import ResetPassword from "./pages/Auth/ResetPassword";
 import ConfirmPassword from "./pages/Auth/ConfirmPassword";
 import NotFound from "./components/NotFound/NotFound";
 import PostProduct from "./components/PostProduct/PostProduct";
-// import Profile from "./pages/Profile/Profile";
+import Cart from "./pages/Cart/Cart";
 import AddProduct from "./pages/AddProduct/AddProduct";
+import Checkout from "./pages/Checkout/Checkout";
 
 function Router() {
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path='/' component={Homepage} />
-          <ProtectedRoute path='/profile' component={AddProduct} />
-          <Route path='/search' component={SearchPage} />
-          <ProtectedRoute path='/post' component={PostProduct} />
-          <Route path='/products' component={Pagination} />
-          <Route path='/products/popular' component={PopularPaginate} />
-          <Route path='/product/:id' component={Product} />
-          <Route path='/login' component={Login} />
-          <Route path='/register' component={Register} />
-          <Route path='/reset' component={ResetPassword} />
-          <Route path='/confirm' component={ConfirmPassword} />
-          <Route path='*' component={NotFound} />
-        </Switch>
-      </BrowserRouter>
+      <PersistGate loading={null} persistor={persistor}>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path='/' component={Homepage} />
+            <ProtectedRoute path='/profile' component={AddProduct} />
+            <Route path='/search' component={SearchPage} />
+            <ProtectedRoute path='/post' component={PostProduct} />
+            <Route path='/products' component={Pagination} />
+            <Route path='/products/popular' component={PopularPaginate} />
+            <Route path='/product/:id' component={Product} />
+            <Route path='/login' component={Login} />
+            <Route path='/register' component={Register} />
+            <Route path='/reset' component={ResetPassword} />
+            <Route path='/confirm' component={ConfirmPassword} />
+            <Route path='/cart' component={Cart} />
+            <Route path='/checkout' component={Checkout} />
+            <Route path='*' component={NotFound} />
+          </Switch>
+        </BrowserRouter>
+      </PersistGate>
     </Provider>
   );
 }
