@@ -18,6 +18,7 @@ import PostProduct from "./components/PostProduct/PostProduct";
 import Cart from "./pages/Cart/Cart";
 import AddProduct from "./pages/AddProduct/AddProduct";
 import Checkout from "./pages/Checkout/Checkout";
+import Category from "./pages/CategoryView/CategoryView";
 
 function Router() {
   return (
@@ -38,6 +39,7 @@ function Router() {
             <Route path='/confirm' component={ConfirmPassword} />
             <Route path='/cart' component={Cart} />
             <Route path='/checkout' component={Checkout} />
+            <Route path='/category' component={Category} />
             <Route path='*' component={NotFound} />
           </Switch>
         </BrowserRouter>

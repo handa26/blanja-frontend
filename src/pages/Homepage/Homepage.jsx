@@ -7,12 +7,7 @@ import NewProducts from "../../components/NewProduct/NewProducts";
 import PopularProducts from "../../components/PopularProducts/PopularProducts";
 
 class Homepage extends React.Component {
-  state = {
-    isLogin: false,
-  }
-
   render() {
-    console.log(this.props.testProps);
     return (
       <>
         <Navbar />
