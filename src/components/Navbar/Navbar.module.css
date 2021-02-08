@@ -53,6 +53,7 @@ input.Search {
   color: #666666 !important;
   box-sizing: border-box !important; 
   margin: 0 !important;
+  cursor: text
 }
 
 .SearchIcon {

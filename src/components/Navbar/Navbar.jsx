@@ -40,10 +40,6 @@ class Navbar extends React.Component {
         </div>
       );
     },
-    searchHandler: "",
-    product_name: "",
-    category: "",
-    searchedItems: {},
   };
 
   logOut = () => {
@@ -62,29 +58,9 @@ class Navbar extends React.Component {
       .catch(err => console.error(err));
   }
 
-  clickOptHandler = (e) => {
-    this.setState({
-      [e.target.name]: `&${[e.target.name]}=${e.target.id}`,
-    });
-  };
-
-  changeHandler = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      window.location.href =
-        "http://localhost:3001/search?name=" + this.state.product_name;
-    }
-  };
-
   render() {
-    const { isLogin, token } = this.props;
-    console.log(isLogin);
+    const { isLogin } = this.props;
     let authBtn;
-
-    console.log(token);
 
     // If user currently in logout state
     // Show the conditional components
@@ -127,7 +103,12 @@ class Navbar extends React.Component {
 
           {/* SEARCH */}
           <div className={`${css.SearchArea} mx-auto`}>
-            <div className={css.SearchBar}>
+            <div
+              className={css.SearchBar}
+              onClick={() => {
+                this.props.history.push("/search");
+              }}
+            >
               <img
                 className={css.SearchIcon}
                 src={SearchIcon}
@@ -138,9 +119,7 @@ class Navbar extends React.Component {
                 name='product_name'
                 className={css.Search}
                 placeholder='Search'
-                onKeyPress={this.handleKeyPress}
-                onChange={this.changeHandler}
-                value={this.state.product_name}
+                disabled
               />
             </div>
             {/* Modal trigger button */}
@@ -148,7 +127,9 @@ class Navbar extends React.Component {
               type='button'
               className={css.Filter}
               data-bs-toggle='modal'
-              data-bs-target='#staticBackdrop'
+              onClick={() => {
+                this.props.history.push("/search");
+              }}
             >
               <img
                 src={FilterIcon}
@@ -156,119 +137,6 @@ class Navbar extends React.Component {
                 alt='filter-icon'
               />
             </button>
-
-            {/* Modal */}
-            <div
-              className='modal fade'
-              id='staticBackdrop'
-              data-bs-backdrop='static'
-              data-bs-keyboard='false'
-              tabIndex='-1'
-              aria-labelledby='staticBackdropLabel'
-              aria-hidden='true'
-            >
-              <div className='modal-dialog'>
-                <div className='modal-content'>
-                  <div class='modal-header'>
-                    <h5 className='modal-title' id='staticBackdropLabel'>
-                      Filter
-                    </h5>
-                    <button
-                      type='button'
-                      className='btn-close'
-                      data-bs-dismiss='modal'
-                      aria-label='Close'
-                    ></button>
-                  </div>
-                  <div className='modal-body'>
-                    {/* Color */}
-                    <strong className='mb-5'>Colors</strong>
-                    <br></br>
-                    <div className='row mt-3 mb-3'>
-                      <button
-                        id='1'
-                        name='color'
-                        className={`btn ${css.BtnRed} rounded-circle me-3 ms-3`}
-                      ></button>
-                      <button
-                        id='2'
-                        name='color'
-                        className={`btn ${css.BtnGreen} rounded-circle me-3 ms-3`}
-                      ></button>
-                      <button
-                        id='3'
-                        name='color'
-                        className={`btn ${css.BtnBlue} rounded-circle me-3 ms-3`}
-                      ></button>
-                      <button
-                        id='4'
-                        name='color'
-                        className={`btn ${css.BtnBlack} rounded-circle me-3 ms-3`}
-                      ></button>
-                    </div>
-                    <div className='dropdown-divider'></div>
-
-                    {/* Category */}
-                    <strong>Category</strong>
-                    <br></br>
-                    <div className='row mt-3 mb-3'>
-                      <button
-                        id='1'
-                        name='category'
-                        className={`btn btn-outline-secondary me-2`}
-                        onClick={this.clickOptHandler}
-                      >
-                        T-shirt
-                      </button>
-                      <button
-                        id='1'
-                        name='category'
-                        className='btn btn-outline-secondary me-2'
-                        onClick={this.clickOptHandler}
-                      >
-                        Short
-                      </button>
-                      <button
-                        id='1'
-                        name='category'
-                        className='btn btn-outline-secondary me-2'
-                        onClick={this.clickOptHandler}
-                      >
-                        Jacket
-                      </button>
-                      <button
-                        id='1'
-                        name='category'
-                        className='btn btn-outline-secondary me-2'
-                        onClick={this.clickOptHandler}
-                      >
-                        Pants
-                      </button>
-                      <button
-                        id='1'
-                        name='category'
-                        className='btn btn-outline-secondary me-2'
-                        onClick={this.clickOptHandler}
-                      >
-                        Shoes
-                      </button>
-                    </div>
-                  </div>
-                  <div className='modal-footer'>
-                    <button
-                      type='button'
-                      className='btn btn-secondary'
-                      data-bs-dismiss='modal'
-                    >
-                      Close
-                    </button>
-                    <button type='button' className='btn btn-primary'>
-                      Apply
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Auth */}

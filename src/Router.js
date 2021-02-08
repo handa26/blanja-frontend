@@ -19,6 +19,7 @@ import Cart from "./pages/Cart/Cart";
 import AddProduct from "./pages/AddProduct/AddProduct";
 import Checkout from "./pages/Checkout/Checkout";
 import Category from "./pages/CategoryView/CategoryView";
+import Search from "./components/Search/SearchItems";
 
 function Router() {
   return (
@@ -28,7 +29,7 @@ function Router() {
           <Switch>
             <Route exact path='/' component={Homepage} />
             <ProtectedRoute path='/profile' component={AddProduct} />
-            <Route path='/search' component={SearchPage} />
+            <Route path='/search' component={Search} />
             <ProtectedRoute path='/post' component={PostProduct} />
             <Route path='/products' component={Pagination} />
             <Route path='/products/popular' component={PopularPaginate} />
