@@ -11,10 +11,10 @@ const AddProduct = () => {
       <Navbar />
       <Container style={{ marginTop: "20px" }}>
         <div className='row'>
-          <div className='col-2'>
+          <div className='col-3'>
             <Sidebar />
           </div>
-          <div className='col-10'>
+          <div className='col-9'>
             <PostProduct />
           </div>
         </div>

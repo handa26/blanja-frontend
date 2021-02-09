@@ -1,77 +1,105 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
-import Avatar from "../../assets/images/profile.png";
+import css from "./Sidebar.module.css";
+import Avatar from "../../assets/images/login-user.png";
+import User from "../../assets/images/user.svg";
+import Location from "../../assets/images/location.svg";
+import Clipboard from "../../assets/images/clipboard.svg";
 
-class Sidebar extends React.Component {
-  render() {
-    return (
-      <div>
-        <div className='d-flex' style={{ flexDirection: "column" }}>
-          <div className='col-4'>
-            <img
-              src={Avatar}
-              style={{
-                borderRadius: "50%",
-                height: "100px",
-                width: "100px",
-                marginTop: "10px",
-              }}
-              alt='profile'
-            />
-          </div>
-          <div className='col-8'>
-            <p
-              style={{ fontSize: "12px", textAlign: "center" }}
-              className='mt-3'
-            >
-              Sean Lennon
+const Sidebar = ({ history, isLogin, token, level, id, name, email }) => {
+  console.log(level, name, email);
+  return (
+    <>
+      <div className={css.MyprofileWrapper}>
+        {/* Photo profile */}
+        <div className={css.ProfileWrapper}>
+          <img
+            src={Avatar}
+            className={css.ProfileImg}
+            style={{ borderRadius: "50%", height: "90px", width: "90px" }}
+            alt='profile'
+          />
+          <div className={css.ProfileInfo}>
+            <p style={{ fontSize: "16px", fontWeight: "600" }}>{name}</p>
+            <p style={{ fontSize: "12px" }}>
+              <i className='fas fa-pen' style={{ marginRight: "5px" }}></i>
+              Change photo profile
             </p>
-            <Link to='#'>
-              <p style={{ fontSize: "10px" }}>
-                <i class='fas fa-pen' style={{ marginRight: "10px" }}></i>Change
-                profile
-              </p>
-            </Link>
           </div>
         </div>
-        <div style={{ height: "100px" }} className='ms-2'>
-          <div className='btn-group dropend'>
-            <button
-              type='button'
-              className='btn bg-transparent dropdown-toggle'
-              data-bs-toggle='dropdown'
-              aria-expanded='false'
+
+        {/* Account control */}
+        <div className={css.Wrapper}>
+          {level === "seller" ? (
+            <div
+              className={css.ControlWrapper}
+              onClick={() => {
+                history.push("/account");
+              }}
             >
-              <i class='fas fa-home me-4'></i>Store
-            </button>
-          </div>
-          <div className='btn-group dropend'>
-            <button
-              type='button'
-              className='btn bg-transparent dropdown-toggle'
-              data-bs-toggle='dropdown'
-              aria-expanded='false'
-            >
-              <i class='fas fa-box me-4'></i>Product
-            </button>
-            <ul class='dropdown-menu'>
-              <li>
-                <Link className='dropdown-item' to='/post'>
-                  My product
-                </Link>
-              </li>
-              <li>
-                <Link className='dropdown-item' to='/post'>
-                  Selling product
-                </Link>
-              </li>
-            </ul>
+              <div className={css.MyAccount}>
+                <img className={css.LogoImg} src={User} alt='user' />
+              </div>
+              <p style={{ marginLeft: "5px", marginTop: "2px" }}>My Products</p>
+            </div>
+          ) : (
+            <>
+              <div
+                className={css.ControlWrapper}
+                onClick={() => {
+                  history.push("/account");
+                }}
+              >
+                <div className={css.MyAccount}>
+                  <img className={css.LogoImg} src={User} alt='user' />
+                </div>
+                <p style={{ marginLeft: "5px", marginTop: "2px" }}>
+                  My Account
+                </p>
+              </div>
+              <div
+                className={css.ControlWrapper}
+                onClick={() => {
+                  history.push("/shipping");
+                }}
+              >
+                <div className={css.Shipping}>
+                  <img className={css.LogoImg} src={Location} alt='user' />
+                </div>
+                <p style={{ marginLeft: "5px", marginTop: "2px" }}>
+                  Shipping Address
+                </p>
+              </div>
+            </>
+          )}
+          <div
+            className={css.ControlWrapper}
+            onClick={() => {
+              history.push("/order");
+            }}
+          >
+            <div className={css.Order}>
+              <img className={css.LogoImg} src={Clipboard} alt='user' />
+            </div>
+            <p style={{ marginLeft: "5px", marginTop: "2px" }}>My order</p>
           </div>
         </div>
       </div>
-    );
-  }
-}
+    </>
+  );
+};
 
-export default Sidebar;
+const mapStateToProps = (state) => {
+  return {
+    isLogin: state.auth.isLogin,
+    token: state.auth.token,
+    id: state.auth.id,
+    level: state.auth.level,
+    name: state.auth.name,
+    email: state.auth.email,
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(Sidebar));

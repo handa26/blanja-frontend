@@ -5,7 +5,6 @@ import { PersistGate } from "redux-persist/integration/react";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 import Homepage from "./pages/Homepage/Homepage";
-import SearchPage from "./pages/Search/Search";
 import Pagination from "./pages/Pagination/Pagination";
 import PopularPaginate from "./pages/PopularPaginate/PopularPaginate";
 import Product from "./pages/Product/Product";
@@ -20,6 +19,9 @@ import AddProduct from "./pages/AddProduct/AddProduct";
 import Checkout from "./pages/Checkout/Checkout";
 import Category from "./pages/CategoryView/CategoryView";
 import Search from "./components/Search/SearchItems";
+import Account from "./pages/Account/Account";
+import Shipping from "./pages/Shipping/Shipping";
+import Order from "./pages/Order/Order";
 
 function Router() {
   return (
@@ -28,7 +30,7 @@ function Router() {
         <BrowserRouter>
           <Switch>
             <Route exact path='/' component={Homepage} />
-            <ProtectedRoute path='/profile' component={AddProduct} />
+            <ProtectedRoute path='/profile' component={Account} />
             <Route path='/search' component={Search} />
             <ProtectedRoute path='/post' component={PostProduct} />
             <Route path='/products' component={Pagination} />
@@ -41,6 +43,9 @@ function Router() {
             <Route path='/cart' component={Cart} />
             <Route path='/checkout' component={Checkout} />
             <Route path='/category' component={Category} />
+            <Route path='/account' component={Account} />
+            <Route path='/shipping' component={Shipping} />
+            <Route path='/order' component={Order} />
             <Route path='*' component={NotFound} />
           </Switch>
         </BrowserRouter>

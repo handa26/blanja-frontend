@@ -7,7 +7,6 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import Navbar from "../../components/Navbar/Navbar";
 
 import css from "./Checkout.module.css";
-import SampleImage from "../../assets/images/men-shirt.png";
 
 const Checkout = ({ location, cart, history }) => {
   const [payment, setPayment] = useState("");
