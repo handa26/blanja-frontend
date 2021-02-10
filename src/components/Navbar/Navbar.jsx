@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import {logout} from '../../redux/action/authAction';
 
 import css from "./Navbar.module.css";
@@ -53,13 +53,12 @@ class Navbar extends React.Component {
       .post(`${process.env.REACT_APP_BASEURL}/auth/logout`, data, config)
       .then((res) => {
         this.props.logoutRedux();
-        console.log(res);
       })
       .catch(err => console.error(err));
   }
 
   render() {
-    const { isLogin } = this.props;
+    const { isLogin, level } = this.props;
     let authBtn;
 
     // If user currently in logout state
@@ -71,13 +70,23 @@ class Navbar extends React.Component {
       // If user login
       authBtn = (
         <>
-          <Link to='/profile' className={css.BtnWrap}>
-            <img
-              src={Avatar}
-              alt='Profile'
-              className='rounded-circle img-fluid'
-            />
-          </Link>
+          {level === "seller" ? (
+            <Link to='/myproducts' className={css.BtnWrap}>
+              <img
+                src={Avatar}
+                alt='Profile'
+                className='rounded-circle img-fluid'
+              />
+            </Link>
+          ) : (
+            <Link to='/profile' className={css.BtnWrap}>
+              <img
+                src={Avatar}
+                alt='Profile'
+                className='rounded-circle img-fluid'
+              />
+            </Link>
+          )}
           <button
             className={`${css.Btn} ${css.Secondary}`}
             onClick={this.logOut}

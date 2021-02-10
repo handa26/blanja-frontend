@@ -22,6 +22,7 @@ import Search from "./components/Search/SearchItems";
 import Account from "./pages/Account/Account";
 import Shipping from "./pages/Shipping/Shipping";
 import Order from "./pages/Order/Order";
+import MyProducts from "./pages/MyProducts/MyProducts";
 
 function Router() {
   return (
@@ -46,6 +47,7 @@ function Router() {
             <Route path='/account' component={Account} />
             <Route path='/shipping' component={Shipping} />
             <Route path='/order' component={Order} />
+            <Route path='/myproducts' component={MyProducts} />
             <Route path='*' component={NotFound} />
           </Switch>
         </BrowserRouter>

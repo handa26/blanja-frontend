@@ -51,7 +51,8 @@ class PopularProducts extends React.Component {
                   id,
                   product_rating,
                 }) => {
-                  let img = image.split(",");
+                  let imgSplit = image.split(",");
+                  let img = imgSplit;
                   return (
                     <CollectionItem
                       click={this.selectProduct}
@@ -59,7 +60,7 @@ class PopularProducts extends React.Component {
                       key={id}
                       name={product_name}
                       brand={product_brand}
-                      img={img[0]}
+                      img={process.env.REACT_APP_BASEURL + img[0]}
                       rating={product_rating}
                       price={product_price}
                     />

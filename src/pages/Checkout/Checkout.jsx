@@ -61,42 +61,46 @@ const Checkout = ({ location, cart, history }) => {
         <h1 style={{ marginTop: "20px" }}>Checkout</h1>
         <div className={css.Wrapper}>
           <div className={css.BagWrapper}>
-            {cart.map((item) => (
-              <div className={css.CheckoutWrapper}>
-                <div className={css.ProductInfo}>
-                  <img
-                    className={css.ProductImg}
-                    src={item.image}
-                    alt='sample'
-                  />
-                  <div style={{ display: "flex", flexDirection: "column" }}>
-                    <p style={{ fontSize: "16px", fontWeight: "bold" }}>
-                      {item.productName}
-                    </p>
+            {cart.map((item) => {
+              let imgSplit = item.image.split(",");
+              let img = imgSplit;
+              return (
+                <div className={css.CheckoutWrapper}>
+                  <div className={css.ProductInfo}>
+                    <img
+                      className={css.ProductImg}
+                      src={process.env.REACT_APP_BASEURL + img[0]}
+                      alt='sample'
+                    />
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <p style={{ fontSize: "16px", fontWeight: "bold" }}>
+                        {item.productName}
+                      </p>
+                      <p
+                        style={{
+                          fontSize: "12px",
+                          fontWeight: "500",
+                          color: "#9B9B9B",
+                        }}
+                      >
+                        {item.productBrand}
+                      </p>
+                    </div>
+                  </div>
+                  <div className={css.TotalPrice}>
                     <p
                       style={{
-                        fontSize: "12px",
-                        fontWeight: "500",
-                        color: "#9B9B9B",
+                        fontSize: "16px",
+                        fontWeight: "600",
+                        color: "#222222",
                       }}
                     >
-                      {item.productBrand}
+                      Rp {toPrice(item.price)}
                     </p>
                   </div>
                 </div>
-                <div className={css.TotalPrice}>
-                  <p
-                    style={{
-                      fontSize: "16px",
-                      fontWeight: "600",
-                      color: "#222222",
-                    }}
-                  >
-                    Rp {toPrice(item.price)}
-                  </p>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
           <div className={css.SummaryCard}>
             <p style={{ fontSize: "16px", fontWeight: "600" }}>

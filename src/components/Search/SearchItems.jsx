@@ -62,7 +62,6 @@ class SearchItems extends React.Component {
       .post(`${process.env.REACT_APP_BASEURL}/auth/logout`, data, config)
       .then((res) => {
         this.props.logoutRedux();
-        console.log(res);
       })
       .catch((err) => console.error(err));
   };
@@ -84,7 +83,6 @@ class SearchItems extends React.Component {
           `${process.env.REACT_APP_BASEURL}/search?name=${this.state.product_name}&sortby=${this.state.sortBy}&sort=${this.state.sortWith}&page=1&limit=20`
         )
         .then(({ data }) => {
-          console.log(data);
           this.setState({ searchedItems: data });
         })
         .catch((err) => console.log(err.message));
@@ -103,10 +101,9 @@ class SearchItems extends React.Component {
   };
 
   render() {
-    const { isLogin } = this.props;
+    const { isLogin, level } = this.props;
     const { searchedItems } = this.state;
     let authBtn;
-    console.log(this.state.searchedItems);
 
     // If user currently in logout state
     // Show the conditional components
@@ -117,13 +114,23 @@ class SearchItems extends React.Component {
       // If user login
       authBtn = (
         <>
-          <Link to='/profile' className={css.BtnWrap}>
-            <img
-              src={Avatar}
-              alt='Profile'
-              className='rounded-circle img-fluid'
-            />
-          </Link>
+          {level === "seller" ? (
+            <Link to='/myproducts' className={css.BtnWrap}>
+              <img
+                src={Avatar}
+                alt='Profile'
+                className='rounded-circle img-fluid'
+              />
+            </Link>
+          ) : (
+            <Link to='/profile' className={css.BtnWrap}>
+              <img
+                src={Avatar}
+                alt='Profile'
+                className='rounded-circle img-fluid'
+              />
+            </Link>
+          )}
           <button
             className={`${css.Btn} ${css.Secondary}`}
             onClick={this.logOut}
@@ -382,14 +389,15 @@ class SearchItems extends React.Component {
                   id,
                   product_rating,
                 }) => {
-                  let img = image.split(",");
+                  let imgSplit = image.split(",");
+                  let img = imgSplit;
                   return (
                     <CollectionItem
                       idUrl={`/product/${id}`}
                       key={id}
                       name={product_name}
                       brand={product_brand}
-                      img={img[0]}
+                      img={process.env.REACT_APP_BASEURL + img[0]}
                       rating={product_rating}
                       price={product_price}
                     />

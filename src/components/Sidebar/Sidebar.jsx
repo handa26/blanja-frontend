@@ -36,7 +36,7 @@ const Sidebar = ({ history, isLogin, token, level, id, name, email }) => {
             <div
               className={css.ControlWrapper}
               onClick={() => {
-                history.push("/account");
+                history.push("/myproducts");
               }}
             >
               <div className={css.MyAccount}>

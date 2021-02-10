@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { connect, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -42,7 +42,7 @@ const Cart = ({ cart, removeFromCart, pickCart, plusQty, minQty }) => {
     setTotalItems(items);
     setTotalPrice(price);
   }, [cart, totalPrice, totalItems, setTotalPrice, setTotalItems]);
-  
+
   let data = [totalPrice, totalItems];
 
   return (
@@ -52,20 +52,24 @@ const Cart = ({ cart, removeFromCart, pickCart, plusQty, minQty }) => {
         <h1 style={{ marginTop: "20px" }}>My Bag</h1>
         <div className={css.CartWrapper}>
           <div className={css.BagWrapper}>
-            {cart.map((item) => (
-              <ProductBag
-                key={item.id}
-                productName={item.productName}
-                productBrand={item.productBrand}
-                imgUrl={item.image}
-                price={item.price}
-                remove={() => removeFromCart(item.id)}
-                picked={() => pickCart(item.id)}
-                min={() => minQty(item.id)}
-                plus={() => plusQty(item.id)}
-                qty={item.qty}
-              />
-            ))}
+            {cart.map((item) => {
+              let imgSplit = item.image.split(",");
+              let img = imgSplit;
+              return (
+                <ProductBag
+                  key={item.id}
+                  productName={item.productName}
+                  productBrand={item.productBrand}
+                  imgUrl={process.env.REACT_APP_BASEURL + img[0]}
+                  price={item.price}
+                  remove={() => removeFromCart(item.id)}
+                  picked={() => pickCart(item.id)}
+                  min={() => minQty(item.id)}
+                  plus={() => plusQty(item.id)}
+                  qty={item.qty}
+                />
+              );
+            })}
           </div>
           <div className={css.SummaryCard}>
             <p style={{ fontSize: "16px", fontWeight: "600" }}>
@@ -85,10 +89,14 @@ const Cart = ({ cart, removeFromCart, pickCart, plusQty, minQty }) => {
                 Rp. {toPrice(totalPrice)}
               </p>
             </div>
-            <Link to={{
-              pathname: "/checkout",
-              data: data,
-            }} type='button' className={`btn btn-primary ${css.BuyBtn}`}>
+            <Link
+              to={{
+                pathname: "/checkout",
+                data: data,
+              }}
+              type='button'
+              className={`btn btn-primary ${css.BuyBtn}`}
+            >
               Checkout
             </Link>
           </div>
