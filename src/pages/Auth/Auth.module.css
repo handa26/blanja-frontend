@@ -20,6 +20,7 @@
   display: flex;
   justify-content: center;
   margin-top: 50px;
+  cursor: pointer;
 }
 
 .Btn {
@@ -136,6 +137,12 @@
   font-size: 14px;
   text-align: right;
   align-self: center;
+}
+
+.ErrorMsg {
+  text-align: center;
+  color: red;
+  font-size: 16px;
 }
 
 .Reset .Link {

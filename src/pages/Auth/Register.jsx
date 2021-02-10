@@ -11,7 +11,7 @@ const Register = ({history}) => {
   const [number, setNumber] = useState("");
   const [store, setStore] = useState("");
   const [password, setPassword] = useState("");
-  const [type, setType] = useState("");
+  const [type, setType] = useState(1);
 
   const toast = () => {
     return (
@@ -52,11 +52,7 @@ const Register = ({history}) => {
         window.location.reload();
       })
       .catch((err) => console.error(err));
-
-    console.log(data);
   };
-
-  console.log(name);
 
   return (
     <section id={css.FormContainer}>

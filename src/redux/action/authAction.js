@@ -18,3 +18,23 @@ export const logout = () => {
     type: actionTypes.LOGOUT,
   };
 };
+
+export const setEmail = (email) => {
+  return {
+    type: actionTypes.SET_EMAIL,
+    payload: email,
+  };
+};
+
+export const removeEmail = (email) => {
+  return {
+    type: actionTypes.REMOVE_EMAIL,
+  };
+};
+
+export const passToken = (token) => {
+  return {
+    type: actionTypes.GET_TOKEN,
+    token,
+  };
+};

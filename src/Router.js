@@ -15,7 +15,6 @@ import ConfirmPassword from "./pages/Auth/ConfirmPassword";
 import NotFound from "./components/NotFound/NotFound";
 import PostProduct from "./components/PostProduct/PostProduct";
 import Cart from "./pages/Cart/Cart";
-import AddProduct from "./pages/AddProduct/AddProduct";
 import Checkout from "./pages/Checkout/Checkout";
 import Category from "./pages/CategoryView/CategoryView";
 import Search from "./components/Search/SearchItems";
@@ -23,6 +22,8 @@ import Account from "./pages/Account/Account";
 import Shipping from "./pages/Shipping/Shipping";
 import Order from "./pages/Order/Order";
 import MyProducts from "./pages/MyProducts/MyProducts";
+import OneTimePass from "./pages/Auth/OneTimePass";
+import Reset from "./pages/Auth/Reset";
 
 function Router() {
   return (
@@ -40,6 +41,8 @@ function Router() {
             <Route path='/login' component={Login} />
             <Route path='/register' component={Register} />
             <Route path='/reset' component={ResetPassword} />
+            <Route path='/otp' component={OneTimePass} />
+            <Route path='/resetpass' component={Reset} />
             <Route path='/confirm' component={ConfirmPassword} />
             <Route path='/cart' component={Cart} />
             <Route path='/checkout' component={Checkout} />
