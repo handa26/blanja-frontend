@@ -3,6 +3,7 @@ import axios from "axios";
 import CollectionItem from "../CollectionItem/CollectionItem";
 
 import css from "./NewProducts.module.css";
+const url = process.env.REACT_APP_BASEURL || "http://34.234.195.75:3000";
 
 class NewProducts extends React.Component {
   constructor() {
@@ -18,7 +19,7 @@ class NewProducts extends React.Component {
 
   getNewProducts = () => {
     axios
-      .get(process.env.REACT_APP_BASEURL + "/products?page=1&limit=8")
+      .get(url + "/products?page=1&limit=8")
       .then(({ data }) => {
         console.log(data.pageInfo);
         this.setState({ products: data });
