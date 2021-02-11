@@ -3,7 +3,7 @@ import axios from "axios";
 import CollectionItem from "../CollectionItem/CollectionItem";
 
 import css from "./NewProducts.module.css";
-const url = process.env.REACT_APP_BASEURL || "http://34.234.195.75:3000";
+const url = "http://34.234.195.75:3000";
 
 class NewProducts extends React.Component {
   constructor() {
