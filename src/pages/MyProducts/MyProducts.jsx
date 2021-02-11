@@ -63,6 +63,9 @@ const MyProducts = () => {
   const notify = () => toast("New product was added!");
   const editedProductNotify = () => toast("Product was updated!");
 
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
   const handleSubmit = () => {
     const config = {
       headers: {
@@ -77,6 +80,7 @@ const MyProducts = () => {
     data.append("product_price", price);
     data.append("product_description", desc);
     data.append("size", size);
+    data.append("product_rating", getRandomInt(5));
     data.append("product_color", color);
     data.append("product_qty", quantity);
     data.append("user_id", userId);
@@ -108,6 +112,7 @@ const MyProducts = () => {
     data.append("product_price", price);
     data.append("product_description", desc);
     data.append("size", size);
+    data.append("product_rating", getRandomInt(5));
     data.append("product_color", color);
     data.append("product_qty", quantity);
     data.append("user_id", userId);
