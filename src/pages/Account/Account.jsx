@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
 import { Container } from "react-bootstrap";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
@@ -6,6 +8,21 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import css from "./Account.module.css";
 
 const Account = () => {
+  const [user, setUser] = useState({});
+  const url = process.env.REACT_APP_BASEURL;
+  const userId = useSelector((state) => state.auth.id);
+
+  useEffect(() => {
+    axios
+      .get(url + `/user/${userId}`)
+      .then(({data}) => {
+        setUser(data);
+      })
+      .catch((err) => {
+        console.log(err.respones)
+      });
+  }, [url, userId])
+
   return (
     <>
       <Navbar />
@@ -30,35 +47,21 @@ const Account = () => {
               <input
                 type='text'
                 id='exampleFormControlInput1'
-                placeholder='Ananda Muhammad'
+                value={user.name}
                 className={css.Input}
               />
             </div>
             <div className='mb-3'>
               <label
-                for='exampleFormControlInput1'
+                for='exampleFormControlInput2'
                 className={`form-label ${css.Label}`}
               >
                 Email
               </label>
               <input
                 type='email'
-                id='exampleFormControlInput1'
-                placeholder='example@gmail.com'
-                className={css.Input}
-              />
-            </div>
-            <div className='mb-3'>
-              <label
-                for='exampleFormControlInput1'
-                className={`form-label ${css.Label}`}
-              >
-                Phone Number
-              </label>
-              <input
-                type='tel'
-                id='exampleFormControlInput1'
-                pattern='[0-9]{4}-[0-9]{4}-[0-9]{4}'
+                id='exampleFormControlInput2'
+                value={user.email}
                 className={css.Input}
               />
             </div>

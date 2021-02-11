@@ -5,35 +5,16 @@ import axios from "axios";
 import css from "./Auth.module.css";
 import BlanjaLogo from "../../assets/images/blanja-logo.svg";
 
-const Register = ({history}) => {
+const Register = ({ history }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
   const [store, setStore] = useState("");
   const [password, setPassword] = useState("");
   const [type, setType] = useState(1);
-
-  const toast = () => {
-    return (
-      <div
-        class='toast d-flex align-items-center'
-        role='alert'
-        aria-live='assertive'
-        aria-atomic='true'
-      >
-        <div class='toast-body'>Hello, world! This is a toast message.</div>
-        <button
-          type='button'
-          class='btn-close ms-auto me-2'
-          data-bs-dismiss='toast'
-          aria-label='Close'
-        ></button>
-      </div>
-    );
-  }
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     const data = {
       name: name,
       email: email,
@@ -47,11 +28,12 @@ const Register = ({history}) => {
       .post(`${process.env.REACT_APP_BASEURL}/auth/register`, data)
       .then((res) => {
         console.log(res);
-        history.push("/login");
-        toast();
-        window.location.reload();
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        if (err.response.data.msg === "Email telah digunakan") {
+          setErrorMsg("*Email already used.");
+        }
+      });
   };
 
   return (
@@ -87,7 +69,8 @@ const Register = ({history}) => {
         </div>
 
         <div className={css.FormSection}>
-          <form action='#' className={css.FillForm} onSubmit={handleSubmit}>
+          <p className={css.ErrorMsg}>{errorMsg}</p>
+          <form className={css.FillForm}>
             <div className={`${css.ColInput} ${css.FormInput}`}>
               <input
                 type='name'
@@ -143,7 +126,14 @@ const Register = ({history}) => {
               />
             </div>
             <div className={`${css.Submit} ${css.FormInput}`}>
-              <button type='submit' className={`${css.SubmitBtn} ${css.Link}`}>
+              <button
+                type='submit'
+                className={`${css.SubmitBtn} ${css.Link}`}
+                onClick={() => {
+                  handleSubmit();
+                  history.push("/login");
+                }}
+              >
                 REGISTER
               </button>
             </div>

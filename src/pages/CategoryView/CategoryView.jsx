@@ -25,7 +25,7 @@ const CategoryView = ({ location }) => {
           <h1>{title}</h1>
         </div>
         <div className={css.FlexList}>
-          {products.products !== undefined ? (
+          {products.products !== "Page not found" ? (
             products.products &&
             products.products.map(
               ({
