@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { Container } from "react-bootstrap";
+
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
 
@@ -11,6 +13,7 @@ const Account = () => {
   const [user, setUser] = useState({});
   const url = process.env.REACT_APP_BASEURL;
   const userId = useSelector((state) => state.auth.id);
+  const level = useSelector((state) => state.auth.level);
 
   useEffect(() => {
     axios
@@ -21,7 +24,11 @@ const Account = () => {
       .catch((err) => {
         console.log(err.respones)
       });
-  }, [url, userId])
+  }, [url, userId]);
+
+  if (level === "seller") {
+    return <Redirect to="/" />
+  } 
 
   return (
     <>

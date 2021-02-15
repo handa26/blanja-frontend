@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
+import { connect } from "react-redux";
 
 import css from "./Auth.module.css";
 import BlanjaLogo from "../../assets/images/blanja-logo.svg";
 
-const Register = ({ history }) => {
+const Register = ({ history, isLogin }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
@@ -35,6 +36,10 @@ const Register = ({ history }) => {
         }
       });
   };
+
+  if (isLogin) {
+    return <Redirect to='/' />;
+  }
 
   return (
     <section id={css.FormContainer}>
@@ -150,4 +155,10 @@ const Register = ({ history }) => {
   );
 };
 
-export default Register;
+const mapStateToProps = (state) => {
+  return {
+    isLogin: state.auth.isLogin,
+  };
+};
+
+export default connect(mapStateToProps)(Register);

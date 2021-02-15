@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
+import styled from "styled-components";
 
 import css from "./Sidebar.module.css";
 import Avatar from "../../assets/images/login-user.png";
@@ -8,8 +9,26 @@ import User from "../../assets/images/user.svg";
 import Location from "../../assets/images/location.svg";
 import Clipboard from "../../assets/images/clipboard.svg";
 
-const Sidebar = ({ history, isLogin, token, level, id, name, email }) => {
-  console.log(level, name, email);
+const Sidebar = ({ level, name }) => {
+  const StyledLink = styled(Link)`
+    text-decoration: none;
+    color: black;
+    transition: all 0.1s;
+
+    &:hover {
+      font-weight: bold;
+      color: orangered;
+    }
+
+    &:active {
+      color: black;
+    }
+
+    &:focus {
+      color: red;
+    }
+  `;
+
   return (
     <>
       <div className={css.MyprofileWrapper}>
@@ -33,58 +52,62 @@ const Sidebar = ({ history, isLogin, token, level, id, name, email }) => {
         {/* Account control */}
         <div className={css.Wrapper}>
           {level === "seller" ? (
-            <div
-              className={css.ControlWrapper}
-              onClick={() => {
-                history.push("/myproducts");
-              }}
-            >
+            <StyledLink className={css.ControlWrapper} to='/myproducts'>
               <div className={css.MyAccount}>
                 <img className={css.LogoImg} src={User} alt='user' />
               </div>
-              <p style={{ marginLeft: "5px", marginTop: "2px" }}>My Products</p>
-            </div>
-          ) : (
-            <>
-              <div
-                className={css.ControlWrapper}
-                onClick={() => {
-                  history.push("/account");
+              <p
+                style={{
+                  marginLeft: "5px",
+                  marginTop: "2px",
                 }}
               >
+                My Products
+              </p>
+            </StyledLink>
+          ) : (
+            <>
+              <StyledLink className={css.ControlWrapper} to='/account'>
                 <div className={css.MyAccount}>
                   <img className={css.LogoImg} src={User} alt='user' />
                 </div>
-                <p style={{ marginLeft: "5px", marginTop: "2px" }}>
+                <p
+                  style={{
+                    marginLeft: "5px",
+                    marginTop: "2px",
+                  }}
+                >
                   My Account
                 </p>
-              </div>
-              <div
-                className={css.ControlWrapper}
-                onClick={() => {
-                  history.push("/shipping");
-                }}
-              >
+              </StyledLink>
+              <StyledLink className={css.ControlWrapper} to='/shipping'>
                 <div className={css.Shipping}>
                   <img className={css.LogoImg} src={Location} alt='user' />
                 </div>
-                <p style={{ marginLeft: "5px", marginTop: "2px" }}>
+                <p
+                  style={{
+                    marginLeft: "5px",
+                    marginTop: "2px",
+                  }}
+                >
                   Shipping Address
                 </p>
-              </div>
+              </StyledLink>
             </>
           )}
-          <div
-            className={css.ControlWrapper}
-            onClick={() => {
-              history.push("/order");
-            }}
-          >
+          <StyledLink className={css.ControlWrapper} to='/order'>
             <div className={css.Order}>
               <img className={css.LogoImg} src={Clipboard} alt='user' />
             </div>
-            <p style={{ marginLeft: "5px", marginTop: "2px" }}>My order</p>
-          </div>
+            <p
+              style={{
+                marginLeft: "5px",
+                marginTop: "2px",
+              }}
+            >
+              My order
+            </p>
+          </StyledLink>
         </div>
       </div>
     </>

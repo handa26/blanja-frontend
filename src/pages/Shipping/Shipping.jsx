@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { Container } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
+
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
 
@@ -9,6 +11,7 @@ import css from "./Shipping.module.css";
 
 const Shipping = () => {
   const userId = useSelector((state) => state.auth.id);
+  const level = useSelector((state) => state.auth.level);
   const [address, setAddress] = useState();
   const [name, setName] = useState("");
   const [city, setCity] = useState("");
@@ -43,6 +46,10 @@ const Shipping = () => {
       })
       .catch((err) => console.log(err.message));
   };
+
+  if (level === "seller") {
+    return <Redirect to="/" />
+  }
 
   return (
     <>

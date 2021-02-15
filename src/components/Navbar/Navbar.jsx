@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import {logout} from '../../redux/action/authAction';
 
 import css from "./Navbar.module.css";

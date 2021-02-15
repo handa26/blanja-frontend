@@ -6,6 +6,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import { Redirect } from "react-router-dom";
+
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
 
@@ -13,7 +15,6 @@ import css from "./MyProducts.module.css";
 
 const MyProducts = () => {
   const [productName, setProductName] = useState("");
-  const [editName, setEditName] = useState("");
   const [category, setCategory] = useState();
   const [filePath, setFilePath] = useState([]);
   const [price, setPrice] = useState("");
@@ -24,36 +25,32 @@ const MyProducts = () => {
   const [color, setColor] = useState("");
   const [products, setProducts] = useState();
   const [product, setProduct] = useState({});
-  const token = useSelector((state) => state.auth.token);
-  const userId = useSelector((state) => state.auth.id);
+
   const url = `${process.env.REACT_APP_BASEURL}/products`;
   const urlSingleProduct = `${process.env.REACT_APP_BASEURL}/product`;
-
-  console.log(filePath);
-  console.log(category, color);
+  const token = useSelector((state) => state.auth.token);
+  const userId = useSelector((state) => state.auth.id);
+  const level = useSelector((state) => state.auth.level);
 
   useEffect(() => {
     axios
       .get(url + `/user/${userId}`)
       .then(({ data }) => {
-        // console.log(data.data);
         setProducts(data.data);
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => console.log(err.response));
   }, [url, userId]);
 
-  useEffect(() => {
-    
-  })
+  useEffect(() => {});
 
   const getSingleProduct = (itemId) => {
     axios
       .get(urlSingleProduct + `/${itemId}`)
-      .then(({data}) => {
+      .then(({ data }) => {
         setProduct(data);
       })
-      .catch((err) => console.log(err.message));
-  }
+      .catch((err) => console.log(err.response));
+  };
 
   const handleFile = (e) => {
     let image = e.target.files;
@@ -92,10 +89,9 @@ const MyProducts = () => {
       .post(`${process.env.REACT_APP_BASEURL}/product`, data, config)
       .then((res) => {
         notify();
-        console.log(res);
         window.location.reload(false);
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => console.log(err.response));
   };
 
   const editSubmit = (id) => {
@@ -124,10 +120,9 @@ const MyProducts = () => {
       .patch(`${process.env.REACT_APP_BASEURL}/product/${id}`, data, config)
       .then((res) => {
         editedProductNotify();
-        console.log(res);
         window.location.reload(false);
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => console.log(err.response));
   };
 
   const deleteProduct = (id, name) => {
@@ -146,10 +141,9 @@ const MyProducts = () => {
             axios
               .delete(`${process.env.REACT_APP_BASEURL}/product/${id}`, config)
               .then((res) => {
-                console.log(res);
                 window.location.reload(false);
               })
-              .catch((err) => console.log(err.message));
+              .catch((err) => console.log(err.response));
           },
         },
         {
@@ -158,6 +152,10 @@ const MyProducts = () => {
       ],
     });
   };
+
+  if (level === "customer") {
+    return <Redirect to='/' />;
+  }
 
   return (
     <>

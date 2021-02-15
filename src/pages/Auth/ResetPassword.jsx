@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import { setEmail } from "../../redux/action/authAction";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, Redirect } from "react-router-dom";
 
 import css from "./Auth.module.css";
 import BlanjaLogo from "../../assets/images/blanja-logo.svg";
 
-const ResetPassword = ({ setEmail, history }) => {
+const ResetPassword = ({ setEmail, history, isLogin }) => {
   const [email, takeEmail] = useState("");
 
   const handleSubmit = () => {
@@ -24,6 +24,10 @@ const ResetPassword = ({ setEmail, history }) => {
         console.log(err.message);
       });
   };
+
+  if (isLogin) {
+    return <Redirect to='/' />;
+  }
 
   return (
     <section id={css.FormContainer}>
@@ -72,10 +76,11 @@ const ResetPassword = ({ setEmail, history }) => {
   );
 };
 
-const mapStateToProps = ({ auth, newState }) => {
+const mapStateToProps = ({ auth, newState, isLogin }) => {
   return {
     auth,
     newState,
+    isLogin,
   };
 };
 

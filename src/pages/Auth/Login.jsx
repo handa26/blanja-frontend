@@ -4,8 +4,6 @@ import axios from "axios";
 import { connect } from "react-redux";
 import {login} from "../../redux/action/authAction";
 
-// import auth from "./Auth";
-
 import css from "./Auth.module.css";
 import BlanjaLogo from "../../assets/images/blanja-logo.svg";
 

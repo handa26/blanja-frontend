@@ -6,7 +6,7 @@ import { Redirect, withRouter } from "react-router-dom";
 import css from "./Auth.module.css";
 import BlanjaLogo from "../../assets/images/blanja-logo.svg";
 
-const OneTimePass = ({ auth, history }) => {
+const OneTimePass = ({ auth, history, isLogin }) => {
   const url = process.env.REACT_APP_BASEURL;
   const [errorMsg, setErrorMsg] = useState("");
   const [otp, setOtp] = useState("");
@@ -24,8 +24,8 @@ const OneTimePass = ({ auth, history }) => {
       });
   };
 
-  if (success) {
-    return <Redirect to='/resetpass' />;
+  if (isLogin) {
+    return <Redirect to='/' />;
   }
 
   return (
@@ -69,10 +69,11 @@ const OneTimePass = ({ auth, history }) => {
   );
 };
 
-const mapStateToProps = ({ auth, newState }) => {
+const mapStateToProps = ({ auth, newState, isLogin }) => {
   return {
     auth,
     newState,
+    isLogin,
   };
 };
 

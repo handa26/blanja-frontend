@@ -11,9 +11,7 @@ import Product from "./pages/Product/Product";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import ResetPassword from "./pages/Auth/ResetPassword";
-import ConfirmPassword from "./pages/Auth/ConfirmPassword";
 import NotFound from "./components/NotFound/NotFound";
-import PostProduct from "./components/PostProduct/PostProduct";
 import Cart from "./pages/Cart/Cart";
 import Checkout from "./pages/Checkout/Checkout";
 import Category from "./pages/CategoryView/CategoryView";
@@ -34,7 +32,6 @@ function Router() {
             <Route exact path='/' component={Homepage} />
             <ProtectedRoute path='/profile' component={Account} />
             <Route path='/search' component={Search} />
-            <ProtectedRoute path='/post' component={PostProduct} />
             <Route path='/products' component={Pagination} />
             <Route path='/products/popular' component={PopularPaginate} />
             <Route path='/product/:id' component={Product} />
@@ -43,14 +40,13 @@ function Router() {
             <Route path='/reset' component={ResetPassword} />
             <Route path='/otp' component={OneTimePass} />
             <Route path='/resetpass' component={Reset} />
-            <Route path='/confirm' component={ConfirmPassword} />
-            <Route path='/cart' component={Cart} />
-            <Route path='/checkout' component={Checkout} />
+            <ProtectedRoute path='/cart' component={Cart} />
+            <ProtectedRoute path='/checkout' component={Checkout} />
             <Route path='/category' component={Category} />
-            <Route path='/account' component={Account} />
-            <Route path='/shipping' component={Shipping} />
-            <Route path='/order' component={Order} />
-            <Route path='/myproducts' component={MyProducts} />
+            <ProtectedRoute path='/account' component={Account} />
+            <ProtectedRoute path='/shipping' component={Shipping} />
+            <ProtectedRoute path='/order' component={Order} />
+            <ProtectedRoute path='/myproducts' component={MyProducts} />
             <Route path='*' component={NotFound} />
           </Switch>
         </BrowserRouter>

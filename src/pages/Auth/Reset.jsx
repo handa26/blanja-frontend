@@ -6,7 +6,7 @@ import { withRouter, Redirect } from "react-router-dom";
 import css from "./Auth.module.css";
 import BlanjaLogo from "../../assets/images/blanja-logo.svg";
 
-const Reset = ({ auth, history }) => {
+const Reset = ({ auth, history, isLogin }) => {
   const url = process.env.REACT_APP_BASEURL;
   const [password, setPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
@@ -33,8 +33,8 @@ const Reset = ({ auth, history }) => {
     }
   }
 
-  if (success) {
-    return <Redirect to='/login' />;
+  if (isLogin) {
+    return <Redirect to='/' />;
   }
 
   return (
@@ -84,10 +84,11 @@ const Reset = ({ auth, history }) => {
   );
 }
 
-const mapStateToProps = ({ auth, newState }) => {
+const mapStateToProps = ({ auth, newState, isLogin }) => {
   return {
     auth,
     newState,
+    isLogin,
   };
 };
 
