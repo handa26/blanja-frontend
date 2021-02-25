@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+# Blanja Web <img src="https://img.shields.io/badge/Build%20with-ReactJs-61dbfb?style=popout&logo=react">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Contents
 
-## Available Scripts
+- [Description](#description)
+- [Features](#features)
+- [Requirements](#requirements-for-development)
+- [Installation](#installation-for-development)
+- [Screenshoots](#screenshoots)
+- [Demo Blanja Web](#demo-blanja-web)
+- [Related Project](#related-project)
 
-In the project directory, you can run:
+## Description
 
-### `npm start`
+**Blanja Web** is a web-based e-commerce application that allows buyers to order
+products of their choice. Consists of 2 types of users, namely buyers and
+sellers.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Features
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Order product
+- History transaction
+- Add product (sellers only)
+- Reset Password
+- etc
 
-### `npm test`
+## Requirements for Development
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [`Blanja Backend`](https://github.com/handa26/products-api)
 
-### `npm run build`
+## Installation for Development
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Use the package manager [npm](https://www.npmjs.com/get-npm) to install all required dependecies.
+```bash
+npm install
+```
+After that, create a file **_.env_** in root directory with the following contents :
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+REACT_APP_BASEURL = "http://host_backend:port_backend"
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Example :
 
-### `npm run eject`
+- http://host_backend:port_backend is http://localhost:8000
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+so, you can write in .env file like this :
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+REACT_APP_BASEURL = "http://localhost:8000"
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Now you're ready to development, just make sure your backend is running perfectly, type `npm start` in terminal for start developing.
+If you're ready to build this project, type `npm run build`, it'll make new folder called `build` and there your entire project will run.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Screenshoots
 
-## Learn More
+<div align="center">
+    <img width="100%" src="./src/assets/images/blanja-login.png">
+    <img width="100%" src="./src/assets/images/blanja-homescreen.png">
+    <img width="100%" src="./src/assets/images/blanja-bag.png">
+</div>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Demo Blanja Web
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Coming soon!
+<!-- This is Blanja Web build version, let's try it.
 
-### Code Splitting
+<a href="http://54.175.146.137:3000/">
+  <img src="https://img.shields.io/badge/Blanja%20Web-Link%20Demo-blue.svg?style=popout&logo=firefox"/>
+</a> -->
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Related Project
 
-### Analyzing the Bundle Size
+RESTful API for this web application, clone this for development Blanja Web.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<a href="https://github.com/handa26/products-api">
+<img src="https://img.shields.io/badge/Blanja%20Backend-Repository-blue.svg?style=popout&logo=github"/>
+</a>
