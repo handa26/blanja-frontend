@@ -1,0 +1,43 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d991b735.chunk.css",
+    "main.js": "/static/js/main.85e71d77.chunk.js",
+    "main.js.map": "/static/js/main.85e71d77.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.7362d5a2.js",
+    "runtime-main.js.map": "/static/js/runtime-main.7362d5a2.js.map",
+    "static/css/2.8f170ff4.chunk.css": "/static/css/2.8f170ff4.chunk.css",
+    "static/js/2.44f034b9.chunk.js": "/static/js/2.44f034b9.chunk.js",
+    "static/js/2.44f034b9.chunk.js.map": "/static/js/2.44f034b9.chunk.js.map",
+    "static/js/3.23405a6b.chunk.js": "/static/js/3.23405a6b.chunk.js",
+    "static/js/3.23405a6b.chunk.js.map": "/static/js/3.23405a6b.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.8f170ff4.chunk.css.map": "/static/css/2.8f170ff4.chunk.css.map",
+    "static/css/main.d991b735.chunk.css.map": "/static/css/main.d991b735.chunk.css.map",
+    "static/js/2.44f034b9.chunk.js.LICENSE.txt": "/static/js/2.44f034b9.chunk.js.LICENSE.txt",
+    "static/media/Cart.1f6462be.svg": "/static/media/Cart.1f6462be.svg",
+    "static/media/Filter.60ddd50c.svg": "/static/media/Filter.60ddd50c.svg",
+    "static/media/Search.e5a25404.svg": "/static/media/Search.e5a25404.svg",
+    "static/media/benjamin-voros.576811c9.png": "/static/media/benjamin-voros.576811c9.png",
+    "static/media/blanja-logo.48ffb029.svg": "/static/media/blanja-logo.48ffb029.svg",
+    "static/media/cart.f376dc7d.svg": "/static/media/cart.f376dc7d.svg",
+    "static/media/clipboard.15c59509.svg": "/static/media/clipboard.15c59509.svg",
+    "static/media/ian-dooley.03718a9a.png": "/static/media/ian-dooley.03718a9a.png",
+    "static/media/jacket.68eee75b.png": "/static/media/jacket.68eee75b.png",
+    "static/media/location.bd7b6f53.svg": "/static/media/location.bd7b6f53.svg",
+    "static/media/login-user.2a907e6b.png": "/static/media/login-user.2a907e6b.png",
+    "static/media/not-found.969ebda6.jpg": "/static/media/not-found.969ebda6.jpg",
+    "static/media/pants.df806b83.png": "/static/media/pants.df806b83.png",
+    "static/media/search-img.08df2e28.png": "/static/media/search-img.08df2e28.png",
+    "static/media/shoes.53f6587c.png": "/static/media/shoes.53f6587c.png",
+    "static/media/shorts.1edfadb6.png": "/static/media/shorts.1edfadb6.png",
+    "static/media/t-shirt.5cca3f32.png": "/static/media/t-shirt.5cca3f32.png",
+    "static/media/user.0c3f4447.svg": "/static/media/user.0c3f4447.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7362d5a2.js",
+    "static/css/2.8f170ff4.chunk.css",
+    "static/js/2.44f034b9.chunk.js",
+    "static/css/main.d991b735.chunk.css",
+    "static/js/main.85e71d77.chunk.js"
+  ]
+}
