@@ -63,12 +63,11 @@ If you're ready to build this project, type `npm run build`, it'll make new fold
 
 ## Demo Blanja Web
 
-Coming soon!
-<!-- This is Blanja Web build version, let's try it.
+This is Blanja Web build version, let's try it.
 
-<a href="http://54.175.146.137:3000/">
+<a href="https://bit.ly/blanjaweb">
   <img src="https://img.shields.io/badge/Blanja%20Web-Link%20Demo-blue.svg?style=popout&logo=firefox"/>
-</a> -->
+</a>
 
 ## Related Project
 
